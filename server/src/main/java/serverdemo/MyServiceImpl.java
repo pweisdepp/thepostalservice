@@ -1,15 +1,11 @@
-package demo;
-
-import demo.proto.HelloReply;
-import demo.proto.HelloRequest;
-import demo.proto.MyService;
+package serverdemo;
 
 import io.grpc.stub.StreamObserver;
-
 import net.devh.boot.grpc.server.service.GrpcService;
+import com.interfacedemo.*;
 
 @GrpcService
-public class MyServiceImpl extends MyService.MyServiceImplBase {
+public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
     @Override
     public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
