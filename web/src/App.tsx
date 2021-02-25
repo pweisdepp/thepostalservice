@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="container">
       <h1>The Postal Service</h1>
-      <Form onChange={formChange} />
+      <Form onSubmit={lookup} onChange={formChange} />
       <button type="button" className="btn btn-primary" onClick={lookup}>Lookup</button>
       {(response !== '') ? <p>{response}</p> : null}
       <Footer />
