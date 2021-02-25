@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  server:
+    container_name: postal_server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - './server:/home/app'
+    ports:
+      - 8080:8080
   web:
     container_name: postal_web
     build:
