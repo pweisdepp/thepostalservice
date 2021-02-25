@@ -1,0 +1,9 @@
+USE postal;
+
+CREATE TABLE IF NOT EXISTS addresses (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    country VARCHAR(2) NOT NULL
+) ENGINE=MyISAM;
+
+
+INSERT INTO addresses (country) VALUES ('US'), ('DE');
