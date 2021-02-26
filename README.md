@@ -1,5 +1,23 @@
 # CPSC5200 Group Project
 
+## Docker
+
+All servers can be started using docker-compose.
+
+```
+docker-compose up -d --build
+# Serving on http://localhost:3000
+docker-compose stop
+```
+
+The front end is now available at `http://localhost:3000`.
+The API is available at `http://localhost:8080`.
+It will continue serving until you stop the cluster with `docker-compose stop`.
+You will need a docker daemon & CLi to use this.
+On Linux, use the suggested packages (probably docker.io and docker-compose)
+On OSX and Windows, I suggest docker desktop.
+On Windows, additionally, I'd suggest WSL.
+
 ## Web
 
 The web app is a React app with a node dev server.
@@ -16,20 +34,6 @@ npm start
 npm test
 ```
 
-## Docker
+## Server
 
-All servers can be started using docker-compose.
-
-```
-docker-compose up -d --build
-# Serving on http://localhost:3001
-docker-compose stop
-```
-
-The front end is now available at `http://localhost:3001`.
-The API is available at [coming soon].
-It will continue serving until you stop the cluster with `docker-compose stop`.
-You will need a docker daemon & CLi to use this.
-On Linux, use the suggested packages (probably docker.io and docker-compose)
-On OSX and Windows, I suggest docker desktop.
-On Windows, additionally, I'd suggest WSL.
+The server app is in [spring](https://spring.io/projects/spring-framework).
