@@ -37,3 +37,15 @@ npm test
 ## Server
 
 The server app is in [spring](https://spring.io/projects/spring-framework).
+
+## DB
+
+The database is MySQL.
+It runs on a container named `db` on port 3306, but this port is only available within the docker-compose network.
+To access the database from the host, use the `adminer` server at http://localhost:8000
+
+* **System** MySQL
+* **Server** `db`
+* **User** `root`
+* **Password** `password` (obviously only for local development, not for deployment)
+* **Database** `postal`
