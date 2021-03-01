@@ -3,13 +3,15 @@
 "AU": {
     "name": "Australia",
     "formats": [
-        { "field": "street_number", "format": "n+" },
-        { "field": "street_name", "format": "string" },
-        { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enum" : true},
-        { "field": "city", "format": "AU_CITY", "enum" : true},
-        { "field": "province", "format": "AU_PROVINCE", "enum" : true},
-        { "field": "zip", "format": "nnnn" },
-        { "field": "country", "format": "Australia", "optional": true }
+        [
+            { "field": "street_number", "format": "[0-9]+" },
+            { "field": "street_name", "format": ".+" },
+            { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enum" : true},
+            { "field": "city", "format": "AU_CITY", "enum" : true},
+            { "field": "province", "format": "AU_PROVINCE", "enum" : true},
+            { "field": "zip", "format": "[0-9]{4}" },
+            { "field": "country", "format": "Australia", "optional": true }
+        ]
     ],
     "enums": {
         "AU_CITY": ["Sidney", "Perth", "..."],
@@ -18,3 +20,27 @@
     }
 }
 }
+
+// /search/TX -> 404, TX isn't a country
+
+// /search/AUS sample body
+
+{
+    "street_number": "123",
+    "street_name": "Main",
+    "street_type": "ST",
+    "city": "Brisbane",
+    "province": "QLD",
+    "zip": "4500"
+}
+
+
+Matching address:
+123 Main ST
+Brisbane QLS 4500
+Australia
+
+
+OR:
+
+No Matching Address

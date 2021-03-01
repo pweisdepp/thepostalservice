@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
@@ -7,10 +7,12 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: postal
-      MYSQL_ROOT_PASSWORD: password 
+      MYSQL_ROOT_PASSWORD: password
     volumes:
-     - './db/init:/docker-entrypoint-initdb.d'
-     - './db/mysql:/var/lib/mysql'
+      - "./db/init:/docker-entrypoint-initdb.d"
+      - "./db/mysql:/var/lib/mysql"
+    ports:
+      - 3306:3306
   adminer:
     image: adminer
     restart: always
@@ -22,7 +24,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     volumes:
-      - './server:/home/app'
+      - "./server:/home/app"
     ports:
       - 8080:8080
   web:
@@ -31,8 +33,8 @@ services:
       context: ./web
       dockerfile: Dockerfile
     volumes:
-      - './web:/web'
-      - '/web/node_modules'
+      - "./web:/web"
+      - "/web/node_modules"
     ports:
       - 3000:3000
     environment:

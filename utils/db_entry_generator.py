@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import mysql.connector
 import os
 import pandas
@@ -6,7 +8,8 @@ import pandas
 RATIO = 0.01
 CURR_DIR = os.getcwd()
 
-#conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1')
+conn = mysql.connector.connect(
+    user='root', password='password', host='127.0.0.1')
 
 
 def insert_records(csv_path):
@@ -14,7 +17,7 @@ def insert_records(csv_path):
     # get random samples
     df = df.sample(frac=RATIO)
     # add random samples to db
-#    df.to_sql('US', con=conn)
+    df.to_sql('US', con=conn)
 
 
 for subdir, dirs, files in os.walk(CURR_DIR):
