@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="yakutat_borough-summary">
+        <SrcDataSource relativeToVRT="1">yakutat_borough-summary.csv</SrcDataSource>
+        <GeometryType>wkbPolygon</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>

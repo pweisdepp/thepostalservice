@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="west_parry_sound_district-summary">
+        <SrcDataSource relativeToVRT="1">west_parry_sound_district-summary.csv</SrcDataSource>
+        <GeometryType>wkbPolygon</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>

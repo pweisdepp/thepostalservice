@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="caxias_do_sul-summary">
+        <SrcDataSource relativeToVRT="1">caxias_do_sul-summary.csv</SrcDataSource>
+        <GeometryType>wkbPolygon</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>

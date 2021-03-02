@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="municipality_of_Österåker-summary">
+        <SrcDataSource relativeToVRT="1">municipality_of_Österåker-summary.csv</SrcDataSource>
+        <GeometryType>wkbPolygon</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>
