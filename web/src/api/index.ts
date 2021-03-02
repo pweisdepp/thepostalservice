@@ -11,7 +11,10 @@ export const greeting = async ({
   country,
 }: Address): Promise<[string, null] | [null, string]> => {
   try {
-    const response = await fetch(`${HOST}/greeting?name=${country}`, GET);
+    const response = await fetch(
+      `${HOST}/search/greeting?name=${country}`,
+      GET
+    );
     if (response.ok) {
       const result = JSON.parse(await response.text()) as { content: string };
       return [result.content, null];
