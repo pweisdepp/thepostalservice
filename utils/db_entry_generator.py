@@ -7,7 +7,7 @@ import sqlalchemy as sa
 
 # Use 1% of openaddress records
 RATIO = 0.01
-CURR_DIR = os.getcwd()
+CSV_DIRECTORY = os.getcwd() + os.sep + "csvData"
 DATATYPES = {'ID': sa.Integer,
              'LON': sa.FLOAT,
              'LAT': sa.FLOAT,
@@ -29,10 +29,10 @@ def insert_records(csv_path):
     # get random samples
     df = df.sample(frac=RATIO)
     # add random samples to db
-    df.to_sql('US', con=engine, if_exists='append', dtype=DATATYPES)
+    df.to_sql('Addresses', con=engine, if_exists='append', dtype=DATATYPES)
 
 
-for subdir, dirs, files in os.walk(CURR_DIR):
+for subdir, dirs, files in os.walk(CSV_DIRECTORY):
     for filename in files:
         filepath = subdir + os.sep + filename
         if filepath.endswith(".csv"):
