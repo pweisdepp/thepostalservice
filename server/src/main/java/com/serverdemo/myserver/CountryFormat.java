@@ -6,6 +6,6 @@ import java.util.Map;
 
 public class CountryFormat {
     String name;
-    Map fields = new HashMap<String, FieldFormat>();
-    Map enumerations = new HashMap<String, List<String>>();
+    Map<String, FieldFormat> fields = new HashMap<>();
+    Map<String, List<String>> enumerations = new HashMap<>();
 }

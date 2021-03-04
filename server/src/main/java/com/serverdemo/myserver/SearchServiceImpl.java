@@ -2,6 +2,7 @@ package com.serverdemo.myserver;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.JsonLoader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service("searchServiceImpl")
@@ -25,7 +28,26 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     ResourceLoader resourceLoader;
 
-    Map countryMetadata = new HashMap<CountryCode, CountryFormat>();
+    Map<CountryCode, CountryFormat> countryMetadata = new HashMap<>();
+
+    @Override
+    public boolean hasCountry(CountryCode countryCode) {
+        return countryMetadata.containsKey(countryCode);
+    }
+
+    public Iterable<ValidationError> validate(Map<?, ?> body, CountryCode country) {
+        CountryFormat format = countryMetadata.get(country);
+        List<ValidationError> errors = new ArrayList<>();
+        for (Object key : body.keySet()) {
+            if (format.fields.containsKey(key)) {
+                // TODO verify the field matches the format
+            } else {
+                errors.add(new ValidationError("ValidationError: " + key + " not in " + country + " formats"));
+            }
+        }
+
+        return errors;
+    }
 
     public Iterable<Address> findAllAddresses() {
         return addressRepository.findAll();
@@ -47,7 +69,7 @@ public class SearchServiceImpl implements SearchService {
             JsonNode metadataJson = JsonLoader.fromFile(file);
 
             // TODO: load metadata from json file into "countryMetadata";
-            //  we can automate copying the resource to server with maven build.
+            // we can automate copying the resource to server with maven build.
 
         } catch (Exception e) {
             // TODO: handle.

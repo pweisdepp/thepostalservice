@@ -1,8 +1,13 @@
 package com.serverdemo.myserver;
 
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,9 +35,23 @@ public class SearchController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping("/{countryCode}")
+    @PostMapping("/{countryCode}")
     @ResponseBody
-    public Iterable<Address> getAddressesByCountry(@PathVariable CountryCode countryCode){
-        return searchService.findAddresses(countryCode);
+    public ResponseEntity<?> getAddressesByCountry(@PathVariable CountryCode countryCode,
+            @RequestBody String requestBodyString) throws Exception {
+        if (!searchService.hasCountry(countryCode)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Country " + countryCode + " has no known formats.\n");
+        }
+        Iterable<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
+        if (errors.iterator().hasNext()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(countryCode));
+    }
+
+    private Map<?, ?> parseBody(String body) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(body, Map.class);
     }
 }
