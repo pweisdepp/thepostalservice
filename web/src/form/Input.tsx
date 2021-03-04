@@ -1,23 +1,24 @@
 import { FC } from "react";
 
+import FormGroup from "./FormGroup";
+
 const Input: FC<{
   name: string;
   help?: string;
   type?: "text" | "number";
   value?: string;
   valueChange?: (val: string) => void;
+  ariaLabel?: string;
 }> = ({
   name,
   help = "",
   type = "text",
   value = "",
   valueChange = () => {},
+  ariaLabel = `Input ${name}`,
 }) => {
   return (
-    <div className="mb-3 form-group">
-      <label htmlFor={name} className="form-label">
-        {name}
-      </label>
+    <FormGroup name={name} help={help}>
       <input
         type={type}
         name={name}
@@ -25,16 +26,9 @@ const Input: FC<{
         value={value}
         onChange={(e) => valueChange(e.target.value)}
         onBlur={(e) => valueChange(e.target.value)}
-        aria-describedBy={name + "Help"}
+        aria-label={ariaLabel}
       />
-      {help == "" ? (
-        []
-      ) : (
-        <small id={name + "Help"} className="form-text text-muted">
-          {help}
-        </small>
-      )}
-    </div>
+    </FormGroup>
   );
 };
 

@@ -5,12 +5,17 @@ import AddressForm from "./AddressForm";
 import Footer from "./Footer";
 import { Address } from "./types";
 
+function newAddress(): Address {
+  return { country: "All" };
+}
+
 function App() {
-  const [address, setAddress] = useState<Address>({ country: "" });
+  const [address, setAddress] = useState<Address>(newAddress());
   const [response, setResponse] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const formChange = (address: Address) => {
+    console.log(`Form Change, address is ${JSON.stringify(address)}`);
     setAddress(address);
   };
 
@@ -23,7 +28,7 @@ function App() {
   return (
     <div className="container">
       <h1>The Postal Service</h1>
-      <AddressForm onSubmit={lookup} onChange={formChange} />
+      <AddressForm address={address} onSubmit={lookup} onChange={formChange} />
       <button type="button" className="btn btn-primary" onClick={lookup}>
         Lookup
       </button>

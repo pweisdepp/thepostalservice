@@ -1,32 +1,44 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
-import Input from "./form/Input";
+import Select from "./form/Select";
 import Form from "./form/Form";
-import { Address } from "./types";
+import CountryForm from "./CountryForm";
+import { Address, CountryCode } from "./types";
+import { countries } from "./metadata";
 
-function AddressForm({
-  onChange,
-  onSubmit,
-}: {
-  onChange: (e: Address) => void;
+const AddressForm: FC<{
+  address: Address;
+  onChange: (address: Address) => void;
   onSubmit: () => void;
-}) {
-  const [address, setAddress] = useState<Address>({ country: "" });
+}> = ({ address, onChange, onSubmit }) => {
+  const [_address, setAddress] = useState<Address>(address);
 
   const countryChange = (country: string) => {
-    setAddress({ ...address, country });
-    onChange(address);
+    console.log(`Country changed to ${country}`);
+    const addr =
+      country == "All"
+        ? address
+        : { ...address, country: country as CountryCode };
+    setAddress(addr);
+    onChange(addr);
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      <Input
+      <Select
         name="Country"
-        value={address.country}
+        value={_address.country}
+        values={countries()}
         valueChange={countryChange}
+        all={true}
       />
+      {_address.country == "All" ? (
+        []
+      ) : (
+        <CountryForm country={_address.country} />
+      )}
     </Form>
   );
-}
+};
 
 export default AddressForm;
