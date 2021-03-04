@@ -1,0 +1,16 @@
+# Python virtual environment setup
+
+# create a new virtual environment in a directory of your choice
+python -m venv /your/directory
+
+# activate virtual environment
+# mac/linux: 
+source /your/directory/bin/activate
+
+# windows needs to run script
+C:\> env\Scripts\activate.bat
+
+# install thepostalservice packages using requirements.txt from our utils folder
+pip install -r requirements.txt
+
+# db generator script should now run successfully, assuming docker is running
