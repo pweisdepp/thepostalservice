@@ -1,0 +1,20 @@
+{
+"US": { },
+"AU": {
+    "name": "Australia",
+    "formats": [
+        { "field": "street_number", "format": "n+" },
+        { "field": "street_name", "format": "string" },
+        { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enum" : true},
+        { "field": "city", "format": "AU_CITY", "enum" : true},
+        { "field": "province", "format": "AU_PROVINCE", "enum" : true},
+        { "field": "zip", "format": "nnnn" },
+        { "field": "country", "format": "Australia", "optional": true }
+    ],
+    "enums": {
+        "AU_CITY": ["Sidney", "Perth", "..."],
+        "AU_PROVINCE": ["ACT", "NSW", "NT", "..."],
+        "STREET_TYPE": ["ALLEY", "ARC", "AVE", "..."]
+    }
+}
+}
