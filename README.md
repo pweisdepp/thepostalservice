@@ -1,13 +1,28 @@
 # CPSC5200 Group Project
 
+## Loading Test Data
+
+```
+./clean.sh
+cd utils
+[ -d venv ] || python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+./db_entry_generator.py
+```
+
 ## Docker
 
 All servers can be started using docker-compose.
 
 ```
+
 docker-compose up -d --build
+
 # Serving on http://localhost:3000
+
 docker-compose stop
+
 ```
 
 The front end is now available at `http://localhost:3000`.
@@ -28,10 +43,12 @@ The page will be available at http://localhost:3000, and will live reload as you
 You can run tests after stopping the server (or in a second shell).
 
 ```
+
 cd web
 npm install
 npm start
 npm test
+
 ```
 
 ## Server
@@ -44,8 +61,12 @@ The database is MySQL.
 It runs on a container named `db` on port 3306, but this port is only available within the docker-compose network.
 To access the database from the host, use the `adminer` server at http://localhost:8000
 
-* **System** MySQL
-* **Server** `db`
-* **User** `root`
-* **Password** `password` (obviously only for local development, not for deployment)
-* **Database** `postal`
+- **System** MySQL
+- **Server** `db`
+- **User** `root`
+- **Password** `password` (obviously only for local development, not for deployment)
+- **Database** `postal`
+
+```
+
+```
