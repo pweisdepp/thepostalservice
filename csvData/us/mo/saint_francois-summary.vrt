@@ -1,8 +1,0 @@
-<OGRVRTDataSource>
-    <OGRVRTLayer name="saint_francois-summary">
-        <SrcDataSource relativeToVRT="1">saint_francois-summary.csv</SrcDataSource>
-        <GeometryType>wkbPolygon</GeometryType>
-        <LayerSRS>EPSG:4326</LayerSRS>
-        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
-    </OGRVRTLayer>
-</OGRVRTDataSource>

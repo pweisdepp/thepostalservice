@@ -1,8 +1,0 @@
-<OGRVRTDataSource>
-    <OGRVRTLayer name="putnam-summary">
-        <SrcDataSource relativeToVRT="1">putnam-summary.csv</SrcDataSource>
-        <GeometryType>wkbPolygon</GeometryType>
-        <LayerSRS>EPSG:4326</LayerSRS>
-        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
-    </OGRVRTLayer>
-</OGRVRTDataSource>
