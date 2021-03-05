@@ -20,21 +20,9 @@ public class SearchServiceImpl implements SearchService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
     ResourceLoader resourceLoader;
 
     Map countryMetadata = new HashMap<CountryCode, CountryFormat>();
-
-    public Iterable<Address> findAllAddresses() {
-        return addressRepository.findAll();
-    }
-
-    public Iterable<Address> findAddresses(CountryCode countryCode) {
-        // TODO: persistence find needs to be implemented.
-        return addressRepository.findAll();
-    }
 
     @PostConstruct
     public void init() {

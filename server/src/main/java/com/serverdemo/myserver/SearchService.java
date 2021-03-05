@@ -8,6 +8,6 @@ enum CountryCode {
 
 @Component
 public interface SearchService {
-    Iterable<Address> findAllAddresses();
-    Iterable<Address> findAddresses(CountryCode countryCode);
+    //Iterable<Address> findAllAddresses();
+    //Iterable<Address> findAddresses(CountryCode countryCode);
 }

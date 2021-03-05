@@ -22,17 +22,17 @@ public class SearchController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping("/all")
-    @ResponseBody
-    public Iterable<Address> getAllAddresses() {
-        return searchService.findAllAddresses();
-    }
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping("/{countryCode}")
-    @ResponseBody
-    public Iterable<Address> getAddressesByCountry(@PathVariable CountryCode countryCode){
-        return searchService.findAddresses(countryCode);
-    }
+//    @CrossOrigin(origins = "*", allowedHeaders = "*")
+//    @GetMapping("/all")
+//    @ResponseBody
+//    public Iterable<Address> getAllAddresses() {
+//        return searchService.findAllAddresses();
+//    }
+//
+//    @CrossOrigin(origins = "*", allowedHeaders = "*")
+//    @GetMapping("/{countryCode}")
+//    @ResponseBody
+//    public Iterable<Address> getAddressesByCountry(@PathVariable CountryCode countryCode){
+//        return searchService.findAddresses(countryCode);
+//    }
 }
