@@ -5,31 +5,30 @@ import os
 import pandas
 import sqlalchemy as sa
 
-# Use ~6% of openaddress subset (US, AU, DE) for 1 million records
-RATIO = 0.001
+# Use 100% of the reduced csv dataset for ~1million records
+# Enter smaller ratio for testing
+RATIO = 1.0
 # Path to CSV files
-CSV_DIRECTORY = "/home/pete/CPSC5200/csvData/"
+CSV_DIRECTORY = "/home/pete/CPSC5200/csvData_reduced/"
 
-XML_DATATYPES = {'LON': 'float',
-             'LAT': 'float',
-             'NUMBER': 'str',
+XML_DATATYPES = {'NUMBER': 'str',
              'STREET': 'str',
              'UNIT': 'str',
              'CITY': 'str',
              'DISTRICT': 'str',
+             'COUNTRY': 'str',
              'REGION': 'str',
              'POSTCODE': 'str',
              'ID': 'str',
              'HASH': 'str'}
 
-SQL_DATATYPES = {'LON': sa.FLOAT,
-             'LAT': sa.FLOAT,
-             'ID': sa.VARCHAR(128),
+SQL_DATATYPES = {'ID': sa.VARCHAR(128),
              'NUMBER': sa.VARCHAR(128),
              'STREET': sa.VARCHAR(128),
              'UNIT': sa.VARCHAR(128),
              'CITY': sa.VARCHAR(128),
              'DISTRICT': sa.VARCHAR(128),
+             'COUNTRY': sa.VARCHAR(128),
              'REGION': sa.VARCHAR(128),
              'POSTCODE': sa.VARCHAR(128),
              'HASH': sa.VARCHAR(128)}
@@ -44,7 +43,6 @@ def insert_records(csv_path):
     df = df.sample(frac=RATIO)
     # add random samples to db
     df.to_sql('addresses', con=engine, if_exists='append', dtype=SQL_DATATYPES, chunksize=2048)
-
 
 for subdir, dirs, files in os.walk(CSV_DIRECTORY):
     for filename in files:
