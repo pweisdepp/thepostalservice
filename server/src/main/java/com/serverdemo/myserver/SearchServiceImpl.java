@@ -1,7 +1,7 @@
 package com.serverdemo.myserver;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jackson.JsonLoader;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("searchServiceImpl")
 public class SearchServiceImpl implements SearchService {
@@ -39,7 +36,7 @@ public class SearchServiceImpl implements SearchService {
         CountryFormat format = countryMetadata.get(country);
         List<ValidationError> errors = new ArrayList<>();
         for (Object key : body.keySet()) {
-            if (format.fields.containsKey(key)) {
+            if (format.formats.containsKey(key)) {
                 // TODO verify the field matches the format
             } else {
                 errors.add(new ValidationError("ValidationError: " + key + " not in " + country + " formats"));
@@ -66,10 +63,20 @@ public class SearchServiceImpl implements SearchService {
 
             Resource metadataResource = resourceLoader.getResource("classpath:" + "metadata.json");
             File file = metadataResource.getFile();
-            JsonNode metadataJson = JsonLoader.fromFile(file);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode metadataJson = mapper.readTree(file);
 
-            // TODO: load metadata from json file into "countryMetadata";
-            // we can automate copying the resource to server with maven build.
+            // we can automate copying the resource to server with maven build in the future
+
+            Iterator<String> itr = metadataJson.fieldNames();
+            while (itr.hasNext()) {  //to get the key fields
+                String countryCode = itr.next();
+
+                JsonNode countryNode = metadataJson.get(countryCode);
+                CountryFormat format = mapper.treeToValue(countryNode, CountryFormat.class);
+                countryMetadata.put(CountryCode.valueOf(countryCode), format);
+            }
+
 
         } catch (Exception e) {
             // TODO: handle.
