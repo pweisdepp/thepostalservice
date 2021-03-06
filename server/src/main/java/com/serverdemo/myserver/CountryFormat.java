@@ -9,8 +9,8 @@ import java.util.Map;
 public class CountryFormat {
 
     String name;
-    Map formats = new HashMap<String, FieldFormat>();
-    Map enumerations = new HashMap<String, List<String>>();
+    Map<String, FieldFormat> formats = new HashMap<>();
+    Map<String, List<String>> enumerations = new HashMap<>();
 
     public String getName() {
         return name;
