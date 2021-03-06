@@ -1,8 +1,0 @@
-<OGRVRTDataSource>
-    <OGRVRTLayer name="hood_river-summary">
-        <SrcDataSource relativeToVRT="1">hood_river-summary.csv</SrcDataSource>
-        <GeometryType>wkbPolygon</GeometryType>
-        <LayerSRS>EPSG:4326</LayerSRS>
-        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
-    </OGRVRTLayer>
-</OGRVRTDataSource>

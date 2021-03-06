@@ -1,8 +1,0 @@
-<OGRVRTDataSource>
-    <OGRVRTLayer name="la_crosse-summary">
-        <SrcDataSource relativeToVRT="1">la_crosse-summary.csv</SrcDataSource>
-        <GeometryType>wkbPolygon</GeometryType>
-        <LayerSRS>EPSG:4326</LayerSRS>
-        <GeometryField encoding="WKT" reportSrcColumn="FALSE" field="area"/>
-    </OGRVRTLayer>
-</OGRVRTDataSource>
