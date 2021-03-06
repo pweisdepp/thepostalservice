@@ -24,6 +24,7 @@ public class SearchController {
     @GetMapping("/greeting")
     @ResponseBody
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        Iterable<Address> addresses = searchService.findAddresses(CountryCode.US);
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
