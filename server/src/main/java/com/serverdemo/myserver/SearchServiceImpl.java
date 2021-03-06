@@ -51,8 +51,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     public Iterable<Address> findAddresses(CountryCode countryCode) {
-        // TODO: persistence find needs to be implemented.
-        return addressRepository.findAll();
+        return addressRepository.findByCountry(countryCode.name());
     }
 
     @PostConstruct
