@@ -1,5 +1,6 @@
 export interface Address {
   country: CountryCode | "All";
+  [k: string]: string;
 }
 
 export type CountryCode = "US" | "AU";

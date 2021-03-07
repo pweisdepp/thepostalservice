@@ -23,6 +23,11 @@ const AddressForm: FC<{
     onChange(addr);
   };
 
+  const valueChange = (addr: Address) => {
+    setAddress(addr);
+    onChange(addr);
+  };
+
   return (
     <Form onSubmit={onSubmit}>
       <Select
@@ -35,7 +40,11 @@ const AddressForm: FC<{
       {_address.country == "All" ? (
         []
       ) : (
-        <CountryForm country={_address.country} />
+        <CountryForm
+          country={_address.country}
+          value={_address}
+          valueChange={valueChange}
+        />
       )}
     </Form>
   );
