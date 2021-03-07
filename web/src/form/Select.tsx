@@ -24,7 +24,7 @@ const Select: FC<{
       <select
         name="name"
         value={value}
-        className="form-select"
+        className="form-select ml-3"
         aria-label={ariaLabel}
         onChange={(e) => valueChange(e.target.value)}
       >
