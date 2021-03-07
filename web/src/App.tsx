@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { greeting } from "./api";
+import { countrySearch } from "./api";
 import AddressForm from "./AddressForm";
 import Footer from "./Footer";
 import { Address } from "./types";
@@ -11,7 +11,7 @@ function newAddress(): Address {
 
 function App() {
   const [address, setAddress] = useState<Address>(newAddress());
-  const [response, setResponse] = useState<string | null>(null);
+  const [response, setResponse] = useState<Address | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const formChange = (address: Address) => {
@@ -20,7 +20,7 @@ function App() {
   };
 
   const lookup = async () => {
-    const [response, error] = await greeting(address);
+    const [response, error] = await countrySearch(address);
     setResponse(response);
     setError(error);
   };
