@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { titleCase } from "./lang";
+
 const FormGroup: FC<{ name: string; ariaLabel?: string; help?: string }> = ({
   name,
   help = "",
@@ -8,7 +10,7 @@ const FormGroup: FC<{ name: string; ariaLabel?: string; help?: string }> = ({
   return (
     <div className="mb-3 form-group">
       <label htmlFor={name} className="form-label">
-        {name}
+        {titleCase(name)}
       </label>
       {children}
       {help == "" ? (

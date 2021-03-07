@@ -11,15 +11,15 @@ export const FORMATS: Metadata = {
           field: "street_type",
           format: "STREET_TYPE",
           optional: true,
-          enum: true,
+          enumeration: true,
         },
         { field: "street_secondary", format: ".+", optional: true },
         { field: "city", format: ".+" },
-        { field: "province", format: "US_STATE", enum: true },
+        { field: "state", format: "US_STATE", enumeration: true },
         { field: "zip", format: "[0-9]{5}" },
       ],
     ],
-    enums: {
+    enumerations: {
       US_STATE: [
         "Alabama",
         "Alaska",
@@ -86,20 +86,20 @@ export const FORMATS: Metadata = {
           field: "street_type",
           format: "STREET_TYPE",
           optional: true,
-          enum: true,
+          enumeration: true,
         },
-        { field: "city", format: "AU_CITY", enum: true },
-        { field: "province", format: "AU_PROVINCE", enum: true },
+        { field: "city", format: "AU_CITY", enumeration: true },
+        { field: "province", format: "AU_PROVINCE", enumeration: true },
         { field: "zip", format: "[0-9]{4}" },
         { field: "country", format: "Australia", optional: true },
       ],
     ],
-    enums: {
+    enumerations: {
       AU_CITY: ["Sidney", "Perth", "Brisbane", "Adelaide", "..."],
       AU_PROVINCE: ["ACT", "NSW", "NT", "..."],
     },
   },
-  enums: {
+  enumerations: {
     STREET_TYPE: ["ALLEY", "ARC", "AVE", "..."],
   },
 };

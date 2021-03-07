@@ -2,12 +2,17 @@ import { FC, useState } from "react";
 
 import AddressField from "./AddressField";
 import { FORMATS } from "./metadata";
-import { CountryCode, Address, FieldDescriptor } from "./types";
+import {
+  CountryCode,
+  Address,
+  FieldDescriptor,
+  CountryMetadata,
+} from "./types";
 
-const ALL_FORMAT = {
+const ALL_FORMAT: CountryMetadata = {
   name: "All",
   formats: [],
-  enums: {},
+  enumerations: {},
 };
 
 const CountryForm: FC<{
@@ -34,7 +39,7 @@ const CountryForm: FC<{
       {format.formats[0].map((field) => (
         <AddressField
           field={field}
-          enums={format.enums}
+          enums={format.enumerations}
           value={address[field.field]}
           valueChange={(value) => fieldChanged(field, value)}
         />

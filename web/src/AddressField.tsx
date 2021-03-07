@@ -6,7 +6,7 @@ import { FORMATS } from "./metadata";
 import { FieldDescriptor } from "./types";
 
 function getEnum(enums: Record<string, string[]>, enumer: string): string[] {
-  return enums[enumer] ?? FORMATS.enums[enumer] ?? [];
+  return enums[enumer] ?? FORMATS.enumerations[enumer] ?? [];
 }
 
 const AddressField: FC<{
@@ -15,7 +15,7 @@ const AddressField: FC<{
   value: string;
   valueChange: (value: string) => void;
 }> = ({ field, enums, value, valueChange }) => {
-  if (field.enum && getEnum(enums, field.format) === undefined) {
+  if (field.enumeration && getEnum(enums, field.format) === undefined) {
     throw new Error(
       `Field {field.field} is enum with format ${
         field.format
@@ -25,7 +25,7 @@ const AddressField: FC<{
 
   return (
     <>
-      {field.enum ? (
+      {field.enumeration ? (
         <Select
           name={field.field}
           value={value}

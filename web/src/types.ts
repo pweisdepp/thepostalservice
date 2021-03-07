@@ -9,7 +9,7 @@ export interface FieldDescriptor {
   field: string;
   format: string;
   optional?: true;
-  enum?: true;
+  enumeration?: true;
 }
 
 export type Format = Array<FieldDescriptor>;
@@ -17,9 +17,9 @@ export type Format = Array<FieldDescriptor>;
 export interface CountryMetadata {
   name: string;
   formats: Format[];
-  enums: Record<string, string[]>;
+  enumerations: Record<string, string[]>;
 }
 
 export type Metadata = Record<CountryCode, CountryMetadata> & {
-  enums: Record<string, string[]>;
+  enumerations: Record<string, string[]>;
 };
