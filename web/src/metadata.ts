@@ -15,11 +15,13 @@ export const FORMATS: Metadata = {
         },
         { field: "street_secondary", format: ".+", optional: true },
         { field: "city", format: ".+" },
+        //{ field: "city", format: "US_CITY", enumeration: true },
         { field: "state", format: "US_STATE", enumeration: true },
         { field: "zip", format: "[0-9]{5}" },
       ],
     ],
     enumerations: {
+      US_CITY: ["Seattle", "NYC", "..."],
       US_STATE: [
         "Alabama",
         "Alaska",

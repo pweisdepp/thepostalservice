@@ -1,5 +1,6 @@
 package com.serverdemo.myserver;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -16,5 +17,5 @@ public interface SearchService {
 
     Iterable<Address> findAddresses(Address address, CountryCode countryCode);
 
-    Iterable<ValidationError> validate(Map<?, ?> body, CountryCode countryCode);
+    List<ValidationError> validate(Map<?, ?> body, CountryCode countryCode);
 }

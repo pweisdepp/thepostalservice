@@ -1,5 +1,6 @@
 package com.serverdemo.myserver;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -32,8 +33,8 @@ public class SearchController {
     @ResponseBody
     public ResponseEntity<?> getAllAddresses(@RequestBody String requestBodyString) throws Exception {
 
-        Iterable<ValidationError> errors = searchService.validate(parseBody(requestBodyString), CountryCode.DEFAULT);
-        if (errors.iterator().hasNext()) {
+        List<ValidationError> errors = searchService.validate(parseBody(requestBodyString), CountryCode.DEFAULT);
+        if (errors.size() > 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
@@ -51,9 +52,8 @@ public class SearchController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Country " + countryCode + " has no known formats.\n");
         }
-
-        Iterable<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
-        if (errors.iterator().hasNext()) {
+        List<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
+        if (errors.size() > 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 

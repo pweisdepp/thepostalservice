@@ -2,27 +2,26 @@
 "DEFAULT": {
     "name": "Default",
     "formats": [
-        { "field": "street_number", "format": "n+" },
-        { "field": "street_name", "format": "string" },
-        { "field": "street_type", "format": "string", "optional": true},
-        { "field": "unit", "format": "string", "optional": true},
-        { "field": "city", "format": "string"},
-        { "field": "district", "format": "string"},
-        { "field": "zip", "format": "nnnn" },
-        { "field": "country", "format": "string", "optional": true }
+        { "field": "street_number", "format": "\\d+" },
+        { "field": "street_name", "format": ".+" },
+        { "field": "street_type", "format": ".+", "optional": true},
+        { "field": "unit", "format": ".+", "optional": true},
+        { "field": "city", "format": ".+"},
+        { "field": "district", "format": ".+"},
+        { "field": "zip", "format": "\\d{4,5}" },
+        { "field": "country", "format": ".+", "optional": true }
     ]
 },
 "US": {
     "name": "United States",
     "formats": [
-        { "field": "street_number", "format": "n+" },
-        { "field": "street_name", "format": "string" },
+        { "field": "street_number", "format": "\\d+" },
+        { "field": "street_name", "format": ".+" },
         { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enumerated" : true},
-        { "field": "unit", "format": "string", "optional": true},
+        { "field": "unit", "format": ".+", "optional": true},
         { "field": "city", "format": "US_CITY", "enumerated" : true},
         { "field": "district", "format": "US_STATE", "enumerated" : true},
-        { "field": "zip", "format": "nnnn" },
-        { "field": "country", "format": "United States", "optional": true }
+        { "field": "zip", "format": "\\d{5}" }
     ],
     "enumerations": {
         "US_CITY": ["Seattle", "NYC", "..."],
@@ -33,14 +32,13 @@
 "AU": {
     "name": "Australia",
     "formats": [
-        { "field": "street_number", "format": "n+" },
-        { "field": "street_name", "format": "string" },
+        { "field": "street_number", "format": "\\d+" },
+        { "field": "street_name", "format": ".+" },
         { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enumerated" : true},
-        { "field": "unit", "format": "string", "optional": true},
+        { "field": "unit", "format": ".*", "optional": true},
         { "field": "city", "format": "AU_CITY", "enumerated" : true},
         { "field": "district", "format": "AU_PROVINCE", "enumerated" : true},
-        { "field": "zip", "format": "nnnn" },
-        { "field": "country", "format": "Australia", "optional": true }
+        { "field": "zip", "format": "\\d{4}" }
     ],
     "enumerations": {
         "AU_CITY": ["Sidney", "Perth", "..."],
