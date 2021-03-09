@@ -28,10 +28,17 @@ public class SearchController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping("/all")
+    @PostMapping("/all")
     @ResponseBody
-    public Iterable<Address> getAllAddresses() {
-        return searchService.findAllAddresses();
+    public ResponseEntity<?> getAllAddresses(@RequestBody String requestBodyString) throws Exception {
+
+        Iterable<ValidationError> errors = searchService.validate(parseBody(requestBodyString), CountryCode.DEFAULT);
+        if (errors.iterator().hasNext()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        Address address = parseAddress(requestBodyString);
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(address));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -39,19 +46,28 @@ public class SearchController {
     @ResponseBody
     public ResponseEntity<?> getAddressesByCountry(@PathVariable CountryCode countryCode,
             @RequestBody String requestBodyString) throws Exception {
+
         if (!searchService.hasCountry(countryCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Country " + countryCode + " has no known formats.\n");
         }
+
         Iterable<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
         if (errors.iterator().hasNext()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(countryCode));
+
+        Address address = parseAddress(requestBodyString);
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(address, countryCode));
     }
 
     private Map<?, ?> parseBody(String body) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(body, Map.class);
+    }
+
+    private Address parseAddress(String body) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(body, Address.class);
     }
 }
