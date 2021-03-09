@@ -11,7 +11,7 @@ enum CountryCode {
 
 @Component
 public interface SearchService {
-    boolean hasCountry(CountryCode countryCode);
+    boolean hasCountry(String countryCode);
 
     Iterable<Address> findAddresses(Address address);
 
