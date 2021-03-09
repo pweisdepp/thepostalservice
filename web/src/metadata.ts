@@ -105,5 +105,9 @@ export const FORMATS: Metadata = {
 };
 
 export function countries() {
-  return Object.keys(FORMATS);
+  // Find `enumerations` key and remove it
+  let countries = Object.keys(FORMATS);
+  const idx = countries.indexOf("enumerations");
+  countries.splice(idx, 1);
+  return countries;
 }
