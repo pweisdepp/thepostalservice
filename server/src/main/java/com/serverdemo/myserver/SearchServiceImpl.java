@@ -46,12 +46,12 @@ public class SearchServiceImpl implements SearchService {
         return errors;
     }
 
-    public Iterable<Address> findAllAddresses() {
-        return addressRepository.findAll();
+    public Iterable<Address> findAddresses(Address address) {
+        return addressRepository.findAddresses(address);
     }
 
-    public Iterable<Address> findAddresses(CountryCode countryCode) {
-        return addressRepository.findByCountry(countryCode.name());
+    public Iterable<Address> findAddresses(Address address, CountryCode countryCode) {
+        return addressRepository.findAddresses(address, countryCode.name());
     }
 
     @PostConstruct
