@@ -7,5 +7,4 @@ RUN mvn -f /home/app/pom.xml -B dependency:resolve dependency:resolve-plugins
 COPY src /home/app/src
 RUN mvn -f /home/app/pom.xml package
 
-EXPOSE 8080
 CMD mvn -f /home/app/pom.xml spring-boot:run

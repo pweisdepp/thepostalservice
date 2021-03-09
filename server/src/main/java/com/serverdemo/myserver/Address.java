@@ -1,5 +1,6 @@
 package com.serverdemo.myserver;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 @Entity(name = "addresses")
 public class Address {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @JsonProperty("street_number")
@@ -19,13 +20,19 @@ public class Address {
     @JsonProperty("street_name")
     private String street;
 
+    @JsonProperty("street_type")
+    private String street_type;
+
+    @JsonProperty("street_secondary")
+    private String street_secondary;
+
     @JsonProperty("unit")
     private String unit;
 
     @JsonProperty("city")
     private String city;
 
-    @JsonProperty("district")
+    @JsonAlias({ "district", "state", "province" })
     private String district;
 
     @JsonProperty("zip")

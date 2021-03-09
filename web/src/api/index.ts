@@ -10,7 +10,7 @@ const GET = {
 };
 
 const POST = {
-  method: "get",
+  method: "post",
   headers: { Accept: "application/json", "Content-Type": "application/json" },
 };
 
@@ -22,7 +22,7 @@ const doApi = <T>(fn: (address: Address) => Promise<Response>) => {
         const result = JSON.parse(await response.text()) as { content: T };
         return [result.content, null];
       } else {
-        return [null, `${response.status}\n${response.body}`];
+        return [null, `${response.status}\n${await response.text()}`];
       }
     } catch ({ message }: any) {
       return [null, message];
@@ -36,8 +36,10 @@ export const greeting = doApi<string>(({ country }) =>
 
 export const countrySearch = doApi<Address>((address) => {
   const { country } = address;
+  const copy: Partial<Address> = { ...address };
+  delete copy.country;
   return fetch(`${HOST}/search/${country}`, {
     ...POST,
-    body: JSON.stringify(address),
+    body: JSON.stringify(copy),
   });
 });
