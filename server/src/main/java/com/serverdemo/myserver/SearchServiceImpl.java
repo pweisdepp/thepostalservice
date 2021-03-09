@@ -108,6 +108,7 @@ public class SearchServiceImpl implements SearchService {
 
         } catch (Exception e) {
             // TODO: handle.
+            e.printStackTrace(System.err);
         }
     }
 }

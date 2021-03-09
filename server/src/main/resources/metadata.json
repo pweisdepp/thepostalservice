@@ -18,16 +18,12 @@
         { "field": "street_number", "format": "\\d+" },
         { "field": "street_name", "format": ".+" },
         { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enumerated" : true},
+        { "field": "street_secondary", "format": ".+", "optional": true },
         { "field": "unit", "format": ".+", "optional": true},
         { "field": "city", "format": "US_CITY", "enumerated" : true},
-        { "field": "district", "format": "US_STATE", "enumerated" : true},
+        { "field": "state", "format": "US_STATE", "enumerated" : true},
         { "field": "zip", "format": "\\d{5}" }
-    ],
-    "enumerations": {
-        "US_CITY": ["Seattle", "NYC", "..."],
-        "US_STATE": ["WA", "NY", "KS", "..."],
-        "STREET_TYPE": ["ST", "RD", "AVE", "..."]
-    }
+    ]
 },
 "AU": {
     "name": "Australia",
@@ -37,13 +33,68 @@
         { "field": "street_type", "format": "STREET_TYPE", "optional": true , "enumerated" : true},
         { "field": "unit", "format": ".*", "optional": true},
         { "field": "city", "format": "AU_CITY", "enumerated" : true},
-        { "field": "district", "format": "AU_PROVINCE", "enumerated" : true},
+        { "field": "province", "format": "AU_PROVINCE", "enumerated" : true},
         { "field": "zip", "format": "\\d{4}" }
-    ],
-    "enumerations": {
-        "AU_CITY": ["Sidney", "Perth", "..."],
-        "AU_PROVINCE": ["ACT", "NSW", "NT", "..."],
-        "STREET_TYPE": ["ALLEY", "ARC", "AVE", "..."]
-    }
+    ]
+},
+"enumerations": {
+    "AU_CITY": ["Sidney", "Perth", "..."],
+    "AU_PROVINCE": ["ACT", "NSW", "NT", "..."],
+    "US_CITY": ["Seattle", "NYC", "..."],
+    "US_STATE": [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Puerto Rico",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      ],
+    "STREET_TYPE": ["ST", "RD", "AVE", "..."]
 }
 }

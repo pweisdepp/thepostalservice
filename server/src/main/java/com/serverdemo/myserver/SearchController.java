@@ -20,6 +20,7 @@ public class SearchController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/greeting")
@@ -54,7 +55,7 @@ public class SearchController {
         }
         List<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
         if (errors.size() > 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapper.writeValueAsString(errors));
         }
 
         Address address = parseAddress(requestBodyString);
@@ -62,12 +63,10 @@ public class SearchController {
     }
 
     private Map<?, ?> parseBody(String body) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(body, Map.class);
     }
 
     private Address parseAddress(String body) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(body, Address.class);
     }
 }

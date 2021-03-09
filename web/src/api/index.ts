@@ -22,7 +22,7 @@ const doApi = <T>(fn: (address: Address) => Promise<Response>) => {
         const result = JSON.parse(await response.text()) as { content: T };
         return [result.content, null];
       } else {
-        return [null, `${response.status}\n${response.body}`];
+        return [null, `${response.status}\n${await response.text()}`];
       }
     } catch ({ message }: any) {
       return [null, message];
