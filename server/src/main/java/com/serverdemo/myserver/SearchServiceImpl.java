@@ -40,7 +40,6 @@ public class SearchServiceImpl implements SearchService {
         List<ValidationError> errors = new ArrayList<>();
         for (Object key : body.keySet()) {
             if (format.formats.containsKey(key)) {
-                // TODO verify the field matches the format
                 String fieldValue = (String) body.get(key);
                 FieldFormat field = format.formats.get(key);
                 String formatValue = field.getFormat();
