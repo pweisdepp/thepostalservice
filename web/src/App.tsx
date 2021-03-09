@@ -4,6 +4,7 @@ import { countrySearch } from "./api";
 import AddressForm from "./AddressForm";
 import Footer from "./Footer";
 import { Address } from "./types";
+import AddressResponses from "./AddressResponses";
 
 function newAddress(): Address {
   return { country: "All" };
@@ -11,7 +12,7 @@ function newAddress(): Address {
 
 function App() {
   const [address, setAddress] = useState<Address>(newAddress());
-  const [response, setResponse] = useState<Address | null>(null);
+  const [response, setResponse] = useState<Address[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const formChange = (address: Address) => {
@@ -32,11 +33,13 @@ function App() {
       <button type="button" className="btn btn-primary" onClick={lookup}>
         Lookup
       </button>
-      {response || error ? (
-        <div className={"mt-4 alert alert-" + (error ? "danger" : "success")}>
-          {response || error}
-        </div>
-      ) : null}
+      <div className="mt-4 container">
+        {error ? (
+          <div className="alert alert-danger">{error}</div>
+        ) : response ? (
+          <AddressResponses responses={response} />
+        ) : null}
+      </div>
       <Footer />
     </div>
   );
