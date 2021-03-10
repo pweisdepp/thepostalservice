@@ -19,8 +19,8 @@ const doApi = <T>(fn: (address: Address) => Promise<Response>) => {
     try {
       const response = await fn(address);
       if (response.ok) {
-        const result = JSON.parse(await response.text()) as { content: T };
-        return [result.content, null];
+        const result = (await response.json()) as T;
+        return [result, null];
       } else {
         return [null, `${response.status}\n${await response.text()}`];
       }
@@ -34,10 +34,15 @@ export const greeting = doApi<string>(({ country }) =>
   fetch(`${HOST}/search/greeting?name=${country}`, GET)
 );
 
-export const countrySearch = doApi<Address>((address) => {
+export const countrySearch = doApi<Address[]>((address) => {
   const { country } = address;
   const copy: Partial<Address> = { ...address };
   delete copy.country;
+  for (const [k, v] of Object.entries(copy)) {
+    if (!v) {
+      delete copy[k];
+    }
+  }
   return fetch(`${HOST}/search/${country}`, {
     ...POST,
     body: JSON.stringify(copy),
