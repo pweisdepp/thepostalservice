@@ -20,11 +20,11 @@ public class Address {
     @JsonProperty("street_name")
     private String street;
 
-    @JsonProperty("street_type")
-    private String street_type;
+    //@JsonProperty("street_type")
+    //private String street_type;
 
-    @JsonProperty("street_secondary")
-    private String street_secondary;
+    //@JsonProperty("street_secondary")
+    //private String street_secondary;
 
     @JsonProperty("unit")
     private String unit;

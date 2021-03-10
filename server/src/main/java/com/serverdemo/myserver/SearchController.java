@@ -46,20 +46,22 @@ public class SearchController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/{countryCode}")
     @ResponseBody
-    public ResponseEntity<?> getAddressesByCountry(@PathVariable CountryCode countryCode,
+    public ResponseEntity<?> getAddressesByCountry(@PathVariable String countryCode,
             @RequestBody String requestBodyString) throws Exception {
 
         if (!searchService.hasCountry(countryCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Country " + countryCode + " has no known formats.\n");
         }
-        List<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCode);
+
+        CountryCode countryCodeEnum = CountryCode.valueOf(countryCode);
+        List<ValidationError> errors = searchService.validate(parseBody(requestBodyString), countryCodeEnum);
         if (errors.size() > 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapper.writeValueAsString(errors));
         }
 
         Address address = parseAddress(requestBodyString);
-        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(address, countryCode));
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.findAddresses(address, countryCodeEnum));
     }
 
     private Map<?, ?> parseBody(String body) throws Exception {

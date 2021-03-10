@@ -12,7 +12,7 @@ services:
       - "./db/init:/docker-entrypoint-initdb.d"
       - "./db/mysql:/var/lib/mysql"
     ports:
-      - 3306:3306
+      - 3333:3306
   adminer:
     image: adminer
     restart: always

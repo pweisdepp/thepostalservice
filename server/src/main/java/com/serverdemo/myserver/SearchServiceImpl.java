@@ -28,11 +28,12 @@ public class SearchServiceImpl implements SearchService {
     ResourceLoader resourceLoader;
 
     Map<CountryCode, CountryFormat> countryMetadata = new HashMap<>();
-    Map<String, Set<String>> enumerations = new HashMap<>();
+    Map<String, Set<String>> formatEnumerations = new HashMap<>();
+    Set<String> countryEnumerations = new HashSet<>();
 
     @Override
-    public boolean hasCountry(CountryCode countryCode) {
-        return countryMetadata.containsKey(countryCode);
+    public boolean hasCountry(String countryCode) {
+        return countryEnumerations.contains(countryCode);
     }
 
     public List<ValidationError> validate(Map<?, ?> body, CountryCode country) {
@@ -44,7 +45,7 @@ public class SearchServiceImpl implements SearchService {
                 FieldFormat field = format.formats.get(key);
                 String formatValue = field.getFormat();
                 if (field.getEnumerated()) {
-                    if (!enumerations.get(formatValue).contains(fieldValue)) {
+                    if (!formatEnumerations.get(formatValue).contains(fieldValue)) {
                         errors.add(new ValidationError(
                                 "ValidationError: " + key + ":" + fieldValue + " not in enumeration"));
 
@@ -96,13 +97,17 @@ public class SearchServiceImpl implements SearchService {
                         for (int i = 0; i < enumerationList.size(); i++) {
                             enumerationSet.add(enumerationList.get(i).asText());
                         }
-                        enumerations.put(enumName, enumerationSet);
+                        formatEnumerations.put(enumName, enumerationSet);
                     }
                 } else {
                     JsonNode countryNode = metadataJson.get(countryCode);
                     CountryFormat format = mapper.treeToValue(countryNode, CountryFormat.class);
                     countryMetadata.put(CountryCode.valueOf(countryCode), format);
                 }
+            }
+
+            for (CountryCode c : CountryCode.values()) {
+                countryEnumerations.add(c.name());
             }
 
         } catch (Exception e) {
