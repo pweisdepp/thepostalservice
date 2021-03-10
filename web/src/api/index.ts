@@ -38,6 +38,7 @@ export const countrySearch = doApi<Address[]>((address) => {
   const { country } = address;
   const copy: Partial<Address> = { ...address };
   delete copy.country;
+  delete copy.street_type;
   for (const [k, v] of Object.entries(copy)) {
     if (!v) {
       delete copy[k];
